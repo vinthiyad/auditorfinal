@@ -680,7 +680,7 @@ document.querySelectorAll('.r,.r2,.r3').forEach(el=>obs.observe(el));
 const cobs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){const t=parseInt(e.target.getAttribute('data-t'));const noplus=e.target.hasAttribute('data-noplus');const s=performance.now(),dur=1800;const tick=n=>{const p=Math.min((n-s)/dur,1),ease=1-Math.pow(1-p,3);e.target.textContent=Math.floor(ease*t)+(p>=1&&!noplus&&t>2?'+':'');if(p<1)requestAnimationFrame(tick);};requestAnimationFrame(tick);cobs.unobserve(e.target);}});},{threshold:.5});
 document.querySelectorAll('[data-t]').forEach(el=>cobs.observe(el));
 function showTab(t){['tax','reg','trade','comp'].forEach(id=>{document.getElementById('tab-'+id).style.display=id===t?'block':'none';});document.querySelectorAll('.stab').forEach((b,i)=>{b.classList.toggle('active',['tax','reg','trade','comp'][i]===t);});}
-function submitForm(){const n=document.getElementById('fn').value.trim(),p=document.getElementById('fp').value.trim();if(!n||!p){if(!n)document.getElementById('fn').style.borderColor='#f97316';if(!p)document.getElementById('fp').style.borderColor='#f97316';return;}document.getElementById('fContent').style.display='none';document.getElementById('fOk').classList.add('show');}
+
 document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click',e=>{e.preventDefault();const t=document.querySelector(a.getAttribute('href'));if(t)t.scrollIntoView({behavior:'smooth',block:'start'});});});
 const responses={'gst registration':'GST Registration takes 3-5 days. We handle everything — registration, monthly GSTR-1/3B, annual returns & refunds. Call +91 93420 00845!','gst':'We handle all GST — Registration, GSTR-1, GSTR-3B, Annual Returns, Refunds & more. Want to book a free consultation?','income tax':'We file ITR-1 to ITR-6 for individuals, firms & companies with maximum deductions. TDS returns, Form 16, advance tax — all covered.','company registration':'We register Pvt Ltd, LLP, OPC & Sole Proprietorships with DIN, DSC, MOA/AOA & MCA filing. Takes 7-10 days.','trademark':'Full brand protection — search, filing, objection reply & renewal. We file within 2-3 days.','import export':'IEC registration takes 3-5 days. We also handle AD Code, DGFT & export documentation.','msme':'MSME/Udyam Registration for government subsidies & priority loans. Done in 1-2 days!','fees':'Our fees are fully transparent — no hidden charges. Call +91 93420 00845 for a FREE quote!','price':'Transparent pricing always. Call +91 93420 00845 for a free quote.','contact':'📞 +91 93420 00845\n✉️ chennaigtax@gmail.com\n📍 Porur, Chennai 600 116','book':'Book via the form on this page, or call +91 93420 00845. We respond within 2 hours!','default':'For accurate info, call us at 📞 +91 93420 00845 or fill the consultation form. We respond within 2 hours!'};
 function getBotReply(msg){const m=msg.toLowerCase();for(const key of Object.keys(responses)){if(key!=='default'&&m.includes(key))return responses[key];}return responses['default'];}
@@ -688,6 +688,23 @@ function addMsg(text,type){const msgs=document.getElementById('chatMsgs');const 
 function toggleChat(){document.getElementById('chatBox').classList.toggle('open');document.querySelector('.chat-badge').style.display='none';}
 function askQ(q){document.getElementById('chatQuick').style.display='none';addMsg(q,'user');setTimeout(()=>addMsg(getBotReply(q),'bot'),500);}
 function sendChat(){const inp=document.getElementById('chatInput');const msg=inp.value.trim();if(!msg)return;document.getElementById('chatQuick').style.display='none';addMsg(msg,'user');inp.value='';setTimeout(()=>addMsg(getBotReply(msg),'bot'),600);}
+
+function submitForm(){
+  const n=document.getElementById('fn').value.trim();
+  const p=document.getElementById('fp').value.trim();
+  const e=document.getElementById('fe')?.value.trim();
+  const s=document.getElementById('fs')?.value;
+  const m=document.getElementById('fm')?.value.trim();
+  if(!n||!p){if(!n)document.getElementById('fn').style.borderColor='#f97316';if(!p)document.getElementById('fp').style.borderColor='#f97316';return;}
+  fetch("https://gtax-server.onrender.com/send",{
+    method:"POST",
+    headers:{"Content-Type":"application/json"},
+    body:JSON.stringify({name:n,phone:p,email:e,service:s,message:m})
+  }).then(r=>{
+    if(r.ok){document.getElementById('fContent').style.display='none';document.getElementById('fOk').classList.add('show');}
+    else{alert("Something went wrong. Please call us directly.");}
+  }).catch(()=>alert("Network error. Please try again."));
+}
 
 </script>
 </body>
