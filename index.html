@@ -330,7 +330,7 @@ footer{background:linear-gradient(135deg,#021a0d,#052e16);color:#fff;padding:56p
   <div class="hero-particles" id="hpts"></div>
   <div class="hero-inner">
     <div>
-      <h1>Your Taxes<br><em>Delivered Seamlesslyn</em></h1>
+      <h1>Your Taxes<br><em>Delivered Seamlessly</em></h1>
       <p class="hero-sub">GST | Income Tax | Company Registration | Import–Export | Trademark | <strong style="color:#fcd34d;">USA Business Setup</strong> | <strong style="color:#fcd34d;">Investor Project Reports</strong> — comprehensive financial & global compliance, served with precision across India and beyond. Doorstep service. 48-hour turnaround.</p>
       <div class="hero-btns">
         <a href="#contact" class="btn-p">Book Free Consultation</a>
@@ -792,7 +792,7 @@ function submitForm(){
   const n=document.getElementById('fn').value.trim();
   const p=document.getElementById('fp').value.trim();
   const e=document.getElementById('fe')?.value.trim();
-  const s=document.getElementById('fs')?.value;
+  const s=document.querySelector('select')?.value||'Not specified';
   const m=document.getElementById('fm')?.value.trim();
 
   // reset borders
