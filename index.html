@@ -852,7 +852,7 @@ footer{background:linear-gradient(135deg,#021a0d,#052e16);color:#fff;padding:56p
 	  
     </div>
     <div class="footer-bottom">
-      <span>© 2025 G-TAX Consultancy Services. All rights reserved.</span>
+      <span>© 2025 G-TAX Consultancy Services. All rights reservedb.</span>
       <span>GST | IT Filing | IE Code | Company Regn. | ISO | FSSAI</span>
     </div>
   </div>
@@ -993,7 +993,10 @@ function submitForm(){
   }).catch(err=>{
     alert("Error: "+err.message);
     btn.textContent='Send Consultation Request →';
-    btn.s
+    btn.style.background='';
+    btn.disabled=false;
+  });
+}
 </script>
 </body>
 </html>
