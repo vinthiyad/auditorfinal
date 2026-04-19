@@ -311,7 +311,7 @@ footer{background:linear-gradient(135deg,#021a0d,#052e16);color:#fff;padding:56p
     <li><a href="#why">Why Us</a></li>
     <li><a href="#testimonials">Clients</a></li>
     <li><a href="#offices">Contact</a></li>
-    <li><a href="#contact" class="nav-cta">Book Free Consultationm</a></li>
+    <li><a href="#contact" class="nav-cta">Book Free Consultation</a></li>
   </ul>
   <button class="hamburger" id="ham"><span></span><span></span><span></span></button>
 </nav>
@@ -795,14 +795,39 @@ function submitForm(){
   const s=document.getElementById('fs')?.value;
   const m=document.getElementById('fm')?.value.trim();
   if(!n||!p){if(!n)document.getElementById('fn').style.borderColor='#f97316';if(!p)document.getElementById('fp').style.borderColor='#f97316';return;}
+  
+  const btn=document.querySelector('.f-sub');
+  btn.textContent='Sending...';
+  btn.disabled=true;
+
   fetch("https://gtax-server.onrender.com/send",{
     method:"POST",
     headers:{"Content-Type":"application/json"},
     body:JSON.stringify({name:n,phone:p,email:e,service:s,message:m})
   }).then(r=>r.json()).then(data=>{
-    if(data.success){document.getElementById('fContent').style.display='none';document.getElementById('fOk').classList.add('show');}
-    else{alert("Error: "+data.error);}
-  }).catch(err=>alert("Error: "+err.message));
+    if(data.success){
+      // reset form
+      document.getElementById('fn').value='';
+      document.getElementById('fp').value='';
+      if(document.getElementById('fe'))document.getElementById('fe').value='';
+      if(document.getElementById('fs'))document.getElementById('fs').selectedIndex=0;
+      if(document.getElementById('fm'))document.getElementById('fm').value='';
+      
+      // show toast
+      const toast=document.createElement('div');
+      toast.innerHTML='✅ <strong>Request Received!</strong> Our team will call you back within 2 hours.';
+      toast.style.cssText='background:#dcfce7;color:#065f46;border:1px solid #86efac;padding:14px 18px;border-radius:12px;margin-bottom:16px;font-size:.93rem;text-align:center;';
+      const form=document.getElementById('fContent');
+      form.insertBefore(toast,form.firstChild);
+      setTimeout(()=>toast.remove(),5000);
+    } else {
+      alert("Error: "+data.error);
+    }
+  }).catch(err=>alert("Error: "+err.message))
+  .finally(()=>{
+    btn.textContent='Send Consultation Request →';
+    btn.disabled=false;
+  });
 }
 
 </script>
