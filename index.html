@@ -311,7 +311,7 @@ footer{background:linear-gradient(135deg,#021a0d,#052e16);color:#fff;padding:56p
     <li><a href="#why">Why Us</a></li>
     <li><a href="#testimonials">Clients</a></li>
     <li><a href="#offices">Contact</a></li>
-    <li><a href="#contact" class="nav-cta">Book Free Consultation</a></li>
+    <li><a href="#contact" class="nav-cta">Book Free Consultationm</a></li>
   </ul>
   <button class="hamburger" id="ham"><span></span><span></span><span></span></button>
 </nav>
@@ -649,9 +649,9 @@ footer{background:linear-gradient(135deg,#021a0d,#052e16);color:#fff;padding:56p
           <div class="fg"><label>Your Name *</label><input id="fn" type="text" placeholder="Full name" required></div>
           <div class="fg"><label>Phone *</label><input id="fp" type="tel" placeholder="+91 98765 43210" required></div>
         </div>
-        <div class="fg"><label>Email</label><input type="email" placeholder="your@email.com"></div>
+        <div class="fg"><label>Email</label><input id="fe" type="email" placeholder="your@email.com"></div>
         <div class="fg"><label>Service Required *</label>
-          <select><option value="">Select a service...</option>
+          <select id="fs"><option value="">Select a service...</option>
             <option>GST Registration & Filing</option><option>Income Tax Filing</option>
             <option>Company Registration</option><option>Import & Export Code</option>
             <option>Trademark Registration</option><option>MSME / Udyam Registration</option>
@@ -661,7 +661,7 @@ footer{background:linear-gradient(135deg,#021a0d,#052e16);color:#fff;padding:56p
             <option>Other / Multiple Services</option>
           </select>
         </div>
-        <div class="fg"><label>Message</label><textarea placeholder="Any specific requirements or deadlines..."></textarea></div>
+        <div class="fg"><label>Message</label><textarea id="fm" placeholder="Any specific requirements or deadlines..."></textarea></div>
         <button class="f-sub" onclick="submitForm()">Send Consultation Request →</button>
         <p class="f-note">🔒 Confidential · We respond within 2 hours · Zero obligations</p>
       </div>
@@ -799,10 +799,10 @@ function submitForm(){
     method:"POST",
     headers:{"Content-Type":"application/json"},
     body:JSON.stringify({name:n,phone:p,email:e,service:s,message:m})
-  }).then(r=>{
-    if(r.ok){document.getElementById('fContent').style.display='none';document.getElementById('fOk').classList.add('show');}
-    else{alert("Something went wrong. Please call us directly.");}
-  }).catch(()=>alert("Network error. Please try again."));
+  }).then(r=>r.json()).then(data=>{
+    if(data.success){document.getElementById('fContent').style.display='none';document.getElementById('fOk').classList.add('show');}
+    else{alert("Error: "+data.error);}
+  }).catch(err=>alert("Error: "+err.message));
 }
 
 </script>
