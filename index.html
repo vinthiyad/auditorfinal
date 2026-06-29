@@ -805,6 +805,8 @@ footer{background:linear-gradient(135deg,#021a0d,#052e16);color:#fff;padding:56p
           </select>
         </div>
         <div class="fg"><label>Message</label><textarea id="fm" placeholder="Any specific requirements or deadlines..."></textarea></div>
+        <input type="text" name="website" style="display:none;" tabindex="-1" autocomplete="off">
+        <input type="hidden" id="formTime" value="">
         <button class="f-sub" onclick="submitForm()">Send Consultation Request →</button>
         <p class="f-note">🔒 Confidential · We respond within 2 hours · Zero obligations</p>
       </div>
@@ -852,7 +854,7 @@ footer{background:linear-gradient(135deg,#021a0d,#052e16);color:#fff;padding:56p
 	  
     </div>
     <div class="footer-bottom">
-      <span>© 2025 G-TAX Consultancy Services. All rights reservedb.</span>
+      <span>© 2025 G-TAX Consultancy Services. All rights reserved.</span>
       <span>GST | IT Filing | IE Code | Company Regn. | ISO | FSSAI</span>
     </div>
   </div>
@@ -931,12 +933,20 @@ function toggleChat(){document.getElementById('chatBox').classList.toggle('open'
 function askQ(q){document.getElementById('chatQuick').style.display='none';addMsg(q,'user');setTimeout(()=>addMsg(getBotReply(q),'bot'),500);}
 function sendChat(){const inp=document.getElementById('chatInput');const msg=inp.value.trim();if(!msg)return;document.getElementById('chatQuick').style.display='none';addMsg(msg,'user');inp.value='';setTimeout(()=>addMsg(getBotReply(msg),'bot'),600);}
 
+
+
 function submitForm(){
+  // honeypot check
+  if(document.querySelector('[name="website"]').value!=''){return;}
+  
+  // time check — less than 3 seconds = bot
+  if(Date.now()-parseInt(document.getElementById('formTime').value)<3000){return;}
+
   const n=document.getElementById('fn').value.trim();
   const p=document.getElementById('fp').value.trim();
   const pc=document.getElementById('fpc')?.value||'+91';
   const e=document.getElementById('fe')?.value.trim();
-  const s=document.querySelector('select[id="fs"]')?.value||document.querySelectorAll('select')[1]?.value||'Not specified';
+  const s=document.getElementById('fs')?.value||'Not specified';
   const m=document.getElementById('fm')?.value.trim();
 
   // reset borders
@@ -956,15 +966,18 @@ function submitForm(){
   btn.disabled=true;
   btn.style.background='#6b7280';
 
-  fetch("https://gtax-server.onrender.com/send",{
+  fetch("https://api.web3forms.com/submit",{
     method:"POST",
     headers:{"Content-Type":"application/json"},
     body:JSON.stringify({
+      access_key:"cd4468f9-4e63-4e7d-8aaf-9b564d6e37ce",
       name:n,
       phone:pc+' '+p,
       email:e,
-      service:s||'Not specified',
-      message:m||'None'
+      service:s,
+      message:m||'None',
+      subject:"New Consultation Request — G-TAX — "+s,
+      botcheck:false
     })
   }).then(r=>r.json()).then(data=>{
     if(data.success){
@@ -976,8 +989,10 @@ function submitForm(){
         document.getElementById('fp').value='';
         if(document.getElementById('fe'))document.getElementById('fe').value='';
         if(document.getElementById('fpc'))document.getElementById('fpc').selectedIndex=0;
-        if(document.querySelector('select[id="fs"]'))document.querySelector('select[id="fs"]').selectedIndex=0;
+        if(document.getElementById('fs'))document.getElementById('fs').selectedIndex=0;
         if(document.getElementById('fm'))document.getElementById('fm').value='';
+        // reset time for next submission
+        document.getElementById('formTime').value=Date.now();
       },2000);
       setTimeout(()=>{
         btn.textContent='Send Consultation Request →';
@@ -985,18 +1000,20 @@ function submitForm(){
         btn.disabled=false;
       },3000);
     } else {
-      alert("Error: "+data.error);
+      alert("Failed: "+data.message);
       btn.textContent='Send Consultation Request →';
       btn.style.background='';
       btn.disabled=false;
     }
   }).catch(err=>{
-    alert("Error: "+err.message);
+    alert("Network error: "+err.message);
     btn.textContent='Send Consultation Request →';
     btn.style.background='';
     btn.disabled=false;
   });
 }
+
+document.getElementById('formTime').value=Date.now();
 </script>
 </body>
 </html>
