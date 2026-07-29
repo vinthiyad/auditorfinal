@@ -276,6 +276,14 @@ footer{background:linear-gradient(135deg,#021a0d,#052e16);color:#fff;padding:56p
 .footer-col a{color:rgba(255,255,255,.55);text-decoration:none;font-size:.86rem;transition:color .3s;cursor:pointer!important;}
 .footer-col a:hover{color:#fff;}
 .footer-bottom{border-top:1px solid rgba(255,255,255,.08);padding-top:20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;color:rgba(255,255,255,.4);font-size:.82rem;}
+
+@media (min-width: 641px) {
+  img[src="UPCOMINHDUBAI1.jpeg"],#GTAXSERVICESID {
+    object-fit: contain !important;
+    background-color: #ffffff !important; 
+    object-position: center center !important;
+  }   
+}
 @media(max-width:1024px){.svc-grid{grid-template-columns:1fr 1fr;}.footer-grid{grid-template-columns:1fr 1fr;}}
 @media(max-width:1021px){.nav-links{display:none;}.hamburger{display:flex;}}
 @media(max-width:900px){.hero-inner{grid-template-columns:1fr;}.hero-right{display:block;}.proc-grid{grid-template-columns:1fr;}.why-grid{grid-template-columns:1fr 1fr;}.testi-grid{grid-template-columns:1fr 1fr;}.stats-band-grid{grid-template-columns:1fr 1fr;}.offices-grid{grid-template-columns:1fr 1fr;}.contact-wrap{grid-template-columns:1fr;}}
@@ -320,14 +328,6 @@ footer{background:linear-gradient(135deg,#021a0d,#052e16);color:#fff;padding:56p
     .cta-right video{max-width:320px;}
 }
 
-@media (min-width: 641px) {
-  img[src="UPCOMINHDUBAI1.jpeg"], 
-  #GTAXSERVICESID {
-    object-fit: contain !important;
-    background-color: #ffffff !important; 
-    object-position: center center !important;
-  }
-}
 
 @media (prefers-color-scheme: dark) {
   body{background:#f0fdf4 !important; color:#1a3a28 !important;}
