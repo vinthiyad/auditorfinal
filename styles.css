@@ -165,7 +165,6 @@ section{padding:88px 5%;}
 .bp{display:inline-block;padding:3px 10px;border-radius:50px;font-size:.72rem;font-weight:600;}
 .bt{background:#fef9c3;color:#92400e;}.br{background:#dcfce7;color:#065f46;}.bd{background:#dbeafe;color:#1e40af;}.bi{background:#f3e8ff;color:#6b21a8;}.bf{background:#ccfbf1;color:#0f766e;}
 
-
 .cta-band{
     background:linear-gradient(135deg,#0a6638,#052e16);
     padding:80px 5%;
@@ -177,37 +176,10 @@ section{padding:88px 5%;}
 .cta-band h2 em{font-style:italic;color:var(--al);}
 .cta-band p{color:rgba(255,255,255,.65);font-size:1.05rem;margin-bottom:2rem;position:relative;}
 .cta-row{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;position:relative;}
-.cta-grid{
-    max-width:1200px;
-    margin:auto;
-
-    display:grid;
-    grid-template-columns:1.3fr 420px;
-
-    gap:50px;
-    align-items:center;
-}
-
-.cta-left{
-    text-align:left;
-}
-
-.cta-right{
-    display:flex;
-    justify-content:center;
-}
-
-.cta-right video{
-
-    width:100%;
-    max-width:380px;
-
-    border-radius:18px;
-
-    display:block;
-
-    box-shadow:0 18px 45px rgba(0,0,0,.35);
-}
+.cta-grid{max-width:1200px;margin:auto;display:grid;grid-template-columns:1.3fr 420px;gap:50px;align-items:center;}
+.cta-left{text-align:left;}
+.cta-right{display:flex;justify-content:center;}
+.cta-right video{ width:100%;max-width:380px;border-radius:18px;display:block;box-shadow:0 18px 45px rgba(0,0,0,.35);}
 
 
 .contact-section{background:linear-gradient(180deg,#f0fdf4,var(--cr));}
@@ -305,10 +277,21 @@ footer{background:linear-gradient(135deg,#021a0d,#052e16);color:#fff;padding:56p
 .footer-col a:hover{color:#fff;}
 .footer-bottom{border-top:1px solid rgba(255,255,255,.08);padding-top:20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;color:rgba(255,255,255,.4);font-size:.82rem;}
 @media(max-width:1024px){.svc-grid{grid-template-columns:1fr 1fr;}.footer-grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:1021px){.nav-links{display:none;}.hamburger{display:flex;}}
 @media(max-width:900px){.hero-inner{grid-template-columns:1fr;}.hero-right{display:block;}.proc-grid{grid-template-columns:1fr;}.why-grid{grid-template-columns:1fr 1fr;}.testi-grid{grid-template-columns:1fr 1fr;}.stats-band-grid{grid-template-columns:1fr 1fr;}.offices-grid{grid-template-columns:1fr 1fr;}.contact-wrap{grid-template-columns:1fr;}}
 @media(max-width:640px){.nav-links{display:none;}.hamburger{display:flex;}section{padding:64px 4%;}.hero{padding:90px 4% 60px;}.hero h1{font-size:2.4rem;}.hero-stats{grid-template-columns:1fr 1fr;}.svc-grid{grid-template-columns:1fr;}.why-grid{grid-template-columns:1fr 1fr;}.testi-grid{grid-template-columns:1fr;}.stats-band-grid{grid-template-columns:1fr 1fr;}.offices-grid{grid-template-columns:1fr;}.footer-grid{grid-template-columns:1fr 1fr;}.f-row{grid-template-columns:1fr;}.cfm{padding:20px;}.chat-box{width:calc(100vw - 32px);right:16px;bottom:140px;}.chat-fab{right:16px;bottom:72px;}#stb{right:16px;bottom:16px;}.cta-band{padding:60px 4%;}}
 @media(max-width:640px){
   .beyond-grid{grid-template-columns:1fr !important;}
+}
+@media(max-width:640px){
+   img.main-banner-img {
+    height: 285px !important; 
+    object-fit: cover !important; 
+  }
+  .responsive-subtext {
+    font-size: 0.7rem !important; 
+    word-break: break-word;
+  }
 }
 @media(max-width:480px){.why-grid{grid-template-columns:1fr;}.footer-grid{grid-template-columns:1fr;}.hero h1{font-size:2rem;}.hero-btns{flex-direction:column;}.hero-btns a{text-align:center;justify-content:center;}}
 @media(max-width:480px){.hero-btns{flex-direction:column;}.hero-btns a{text-align:center;justify-content:center;}}
@@ -330,35 +313,22 @@ footer{background:linear-gradient(135deg,#021a0d,#052e16);color:#fff;padding:56p
   .svc-card.cm{background:linear-gradient(135deg,#fefce8,#fff) !important;}
   .svc-card.cm .svc-hd{background:linear-gradient(135deg,#fefce8,#fef9c3) !important;}
 }
-
-
 @media (max-width:768px){
-
-    .cta-grid{
-
-        grid-template-columns:1fr;
-
-        gap:35px;
-    }
-
-    .cta-left{
-
-        text-align:center;
-
-        order:2;
-    }
-
-    .cta-right{
-
-        order:1;
-    }
-
-    .cta-right video{
-
-        max-width:320px;
-    }
-
+    .cta-grid{grid-template-columns:1fr;gap:35px;}
+    .cta-left{text-align:center;order:2;}
+    .cta-right{order:1;}
+    .cta-right video{max-width:320px;}
 }
+
+@media (min-width: 641px) {
+  img[src="UPCOMINHDUBAI1.jpeg"], 
+  #GTAXSERVICESID {
+    object-fit: contain !important;
+    background-color: #ffffff !important; 
+    object-position: center center !important;
+  }
+}
+
 @media (prefers-color-scheme: dark) {
   body{background:#f0fdf4 !important; color:#1a3a28 !important;}
   .svc-card{background:#fff !important;}
