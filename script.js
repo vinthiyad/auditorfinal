@@ -65,7 +65,7 @@ function submitForm(){
     method:"POST",
     headers:{"Content-Type":"application/json"},
     body:JSON.stringify({
-      access_key:"cd4468f9-4e63-4e7d-8aaf-9b564d6e37ce",
+      access_key:"2495f3be-c6ff-44ca-8fc5-869a54644bac",
       name:n,
       phone:pc+' '+p,
       email:e,
@@ -109,3 +109,19 @@ function submitForm(){
 }
 
 document.getElementById('formTime').value=Date.now();
+
+// Conference Gallery
+let confIdx=0;
+const confTotal=10;
+const confTrack=document.getElementById('confTrack');
+const confDots=document.querySelectorAll('.conf-dot');
+
+function confGoTo(n){
+  confIdx=(n+confTotal)%confTotal;
+  confTrack.style.transform=`translateX(-${confIdx*100}%)`;
+  confDots.forEach((d,i)=>{d.style.background=i===confIdx?'#fcd34d':'#fff';d.style.opacity=i===confIdx?'1':'.5';});
+}
+function confNext(){confGoTo(confIdx+1);}
+function confPrev(){confGoTo(confIdx-1);}
+confDots.forEach((d,i)=>d.addEventListener('click',()=>confGoTo(i)));
+setInterval(confNext, 3000);
